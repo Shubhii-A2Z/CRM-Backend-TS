@@ -1,3 +1,5 @@
+import bcrypt from 'bcrypt';
+
 import { CreateUserDTO } from "@/dtos/CreateUserDTO";
 import { Repository } from "@/repositories/repository.interface";
 import { User } from "@prisma/client";
@@ -19,6 +21,9 @@ export class UserService{
     }
 
     async create(data: CreateUserDTO): Promise<User>{
+        const salt=bcrypt.genSaltSync(10);
+        data.password=bcrypt.hashSync(data.password,salt);
+        
         const user=await this.repository.create(data);
         return user;
     }
