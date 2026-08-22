@@ -1,3 +1,4 @@
+import { CreateUserDTO } from "@/dtos/CreateUserDTO";
 import { Repository } from "@/repositories/repository.interface";
 import { User } from "@prisma/client";
 
@@ -15,5 +16,10 @@ export class UserService{
 
     async getAll(): Promise<User[] | null>{
         return await this.repository.getAll();
+    }
+
+    async create(data: CreateUserDTO): Promise<User>{
+        const user=await this.repository.create(data);
+        return user;
     }
 }

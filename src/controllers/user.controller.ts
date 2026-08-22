@@ -40,4 +40,15 @@ export class UserController{
             error: {}
         });
     }
+
+    createUser = async (req: Request, resp: Response) => {
+        const response=await this.userService.create(req.body);
+
+        return resp.status(StatusCodes.CREATED).json({
+            success: true,
+            message: "User created succesfully",
+            data: response,
+            error: {}
+        });
+    }
 }

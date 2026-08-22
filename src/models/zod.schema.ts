@@ -8,3 +8,9 @@ export const createBookingSchema=z.object({
 });
 
 // Validate this schema using zodValidate middleware via:- validateRequestBody(createBookingSchema)
+
+export const createUserSchema=z.object({
+    name: z.string({error: "Name is mandatory"}),
+    email: z.email({error: "Email is mandatory"}),
+    password: z.string({error: "Password is mandatory"})
+})
