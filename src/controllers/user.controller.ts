@@ -46,9 +46,22 @@ export class UserController{
 
         return resp.status(StatusCodes.CREATED).json({
             success: true,
-            message: "User created succesfully",
+            message: "User created successfully",
             data: response,
             error: {}
         });
     }
+
+    signIn = async(req: Request,resp: Response)=>{
+        const response=await this.userService.signIn(req.body);
+
+        return resp.status(StatusCodes.OK).json({
+            success: true,
+            message: "User signed in successfully",
+            JWT_Token: response,
+            error: {}
+        });
+    }
+
+    
 }

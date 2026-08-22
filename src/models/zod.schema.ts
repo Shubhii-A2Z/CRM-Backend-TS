@@ -13,4 +13,9 @@ export const createUserSchema=z.object({
     name: z.string({error: "Name is mandatory"}),
     email: z.email({error: "Email is mandatory"}),
     password: z.string({error: "Password is mandatory"})
-})
+});
+
+export const signInSchema=z.object({
+    email: z.email({error: "Email is mandatory"}),
+    password: z.string({error: "Password is mandatory"})
+});

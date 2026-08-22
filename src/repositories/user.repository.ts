@@ -39,4 +39,13 @@ export class UserRepository implements Repository{
     async update() {
         
     }
+
+    async getUserByEmail(userEmail: string): Promise<User | null> {
+        const user: User | null = await prismaClient.user.findUnique({
+            where:{
+                email: userEmail
+            }
+        });
+        return user;
+    }
 }

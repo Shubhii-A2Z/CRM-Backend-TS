@@ -11,13 +11,13 @@ const app=express();
 app.use(express.json());
 
 app.use(cookieParser());
+app.use('/api',apiRouter);
 
 /**
  * Adding the error handler middleware: this will replace the default error handler middlware
  */
 app.use(genericErrorHandler);
 
-app.use('/api',apiRouter);
 
 app.listen(serverConfig.PORT,async()=>{
     console.log(`Server started at PORT: ${serverConfig.PORT}`);
