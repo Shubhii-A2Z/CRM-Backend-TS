@@ -3,7 +3,7 @@ import { User } from "@prisma/client";
 
 export class UserService{
 
-    private repository: Repository; 
+    private repository: Repository;
 
     constructor(repository: Repository){
         this.repository=repository;
