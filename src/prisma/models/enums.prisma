@@ -3,3 +3,11 @@ enum Role{
     ADMIN
     ENGINEER
 }
+
+enum Status{
+    OPEN
+    IN_PROGRESS
+    RESOLVED
+    ON_HOLD
+    CANCELLED
+}
