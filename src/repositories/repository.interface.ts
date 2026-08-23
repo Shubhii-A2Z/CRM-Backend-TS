@@ -1,11 +1,8 @@
-import { CreateUserDTO } from "@/dtos/CreateUserDTO";
-import { User } from "@prisma/client";
-
 export interface Repository{
-    create(data: CreateUserDTO): Promise<User>;
-    get(userId: string): Promise<User | null>;
-    getAll(): Promise<User[] | null>;
+    create(data: any): Promise<any>;
+    get(id: string): Promise<any | null>;
+    getAll(): Promise<any>;
     delete(): Promise<any>;
     update(): Promise<any>;
-    getUserByEmail(userEmail: string): Promise<User | null>;
+    getUserByEmail(email: string): Promise<any | null>;
 }

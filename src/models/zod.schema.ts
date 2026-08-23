@@ -19,3 +19,11 @@ export const signInSchema=z.object({
     email: z.email({error: "Email is mandatory"}),
     password: z.string({error: "Password is mandatory"})
 });
+
+export const createTicketSchema=z.object({
+    title: z.string({error: "Title is mandatory"}),
+    description: z.string({error: "Description is mandatory"}),
+    priority: z.number().optional(),
+    assignee: z.email({error: "Assignee is mandatory"}),
+    assignedTo: z.email({error: "AssignedTo is mandatory"})
+});
