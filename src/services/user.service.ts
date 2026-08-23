@@ -6,8 +6,9 @@ import { User } from "@prisma/client";
 import { SignInDTO } from '@/dtos/SignInDTO';
 import { NotFoundError, UnauthorizedAccess } from '@/utils/errors/app.error';
 import { JWTToken } from '@/utils/auth.util';
+import { Service } from './service.interface';
 
-export class UserService{
+export class UserService implements Service{
 
     private repository: Repository;
 
