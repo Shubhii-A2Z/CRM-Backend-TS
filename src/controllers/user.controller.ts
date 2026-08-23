@@ -10,7 +10,7 @@ export class UserController{
     }
 
     getUser = async(req: Request, resp: Response) => {
-        const userId=req.params.id;
+        const userId=(req as any).user.id;
 
         if(!userId || typeof userId!='string'){
             return resp.status(StatusCodes.BAD_REQUEST).json({
@@ -19,12 +19,19 @@ export class UserController{
             });
         }
 
-        const response=await this.userService.get(userId);
+        const user=await this.userService.get(userId);
+
+        if(!user){
+            return resp.status(StatusCodes.NOT_FOUND).json({
+                success: false,
+                message: "User with id not found"
+            });
+        }
 
         return resp.status(StatusCodes.OK).json({
             success: true,
             message: "User fetched successfully",
-            data: response,
+            data: user,
             error: {}
         });
     }
