@@ -8,4 +8,7 @@ model Ticket{
     assignedTo  String
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @default(now())
+
+    userIDs     String[]    @db.ObjectId
+    users       User[]      @relation(fields: [userIDs], references: [id])
 }
