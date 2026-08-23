@@ -1,9 +1,11 @@
 model Ticket{
-    id String @id @default(auto()) @map("_id") @db.ObjectId
-    title String
+    id          String      @id @default(auto()) @map("_id") @db.ObjectId
+    title       String
     description String
-    status Status @default(OPEN)
-    priority Int @default(4)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+    status      Status      @default(OPEN)
+    priority    Int         @default(4)
+    assignee    String
+    assignedTo  String
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @default(now())
 }
