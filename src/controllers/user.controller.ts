@@ -1,12 +1,15 @@
-import { UserService } from "@/services/user.service";
+import { Service } from "@/services/service.interface";
+import { SignInStrategy } from "@/services/signin.strategy";
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export class UserController{
-    private userService: UserService;
+    private userService: Service;
+    private userSignIn: SignInStrategy;
 
-    constructor(userService: UserService){
+    constructor(userService: Service, userSignIn: SignInStrategy){
         this.userService=userService;
+        this.userSignIn=userSignIn;
     }
 
     getUser = async(req: Request, resp: Response) => {
@@ -60,7 +63,7 @@ export class UserController{
     }
 
     signIn = async(req: Request,resp: Response)=>{
-        const response=await this.userService.signIn(req.body);
+        const response=await this.userSignIn.signIn(req.body);
 
         return resp.status(StatusCodes.OK).json({
             success: true,

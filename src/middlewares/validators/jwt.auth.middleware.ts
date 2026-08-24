@@ -2,8 +2,10 @@ import { JWTToken } from "@/utils/auth.util";
 import { UnauthorizedAccess } from "@/utils/errors/app.error";
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import { AuthStrategy } from "./auth.strategy";
 
-export class JWTAuth{
+export class JWTAuth implements AuthStrategy{
+    
     isLoggedIn(req: Request, resp: Response, next: NextFunction){
         // Extracting the jwt token from request headers
         const token=req.headers.authorization?.split(' ')[1]; // Token will be of the form: Bearer <token>

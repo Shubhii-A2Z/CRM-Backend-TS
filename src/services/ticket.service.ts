@@ -1,12 +1,12 @@
 import { Ticket } from "@prisma/client";
 import { Service } from "./service.interface";
-import { TicketRepository } from "@/repositories/ticket.repository";
+import { Repository } from "@/repositories/repository.interface";
 
 export class TicketService implements Service{
 
-    private repository: TicketRepository;
+    private repository: Repository;
 
-    constructor(repository: TicketRepository){
+    constructor(repository: Repository){
         this.repository=repository;
     }
 
