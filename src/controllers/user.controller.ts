@@ -1,30 +1,30 @@
 import { Service } from "@/services/service.interface";
-import { SignInStrategy } from "@/services/signin.strategy";
+import { SignInStrategy } from "@/services/signInService/signin.strategy";
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
-export class UserController{
+export class UserController {
     private userService: Service;
     private userSignIn: SignInStrategy;
 
-    constructor(userService: Service, userSignIn: SignInStrategy){
-        this.userService=userService;
-        this.userSignIn=userSignIn;
+    constructor(userService: Service, userSignIn: SignInStrategy) {
+        this.userService = userService;
+        this.userSignIn = userSignIn;
     }
 
-    getUser = async(req: Request, resp: Response) => {
-        const userId=(req as any).user.id;
+    getUser = async (req: Request, resp: Response) => {
+        const userId = (req as any).user.id;
 
-        if(!userId || typeof userId!='string'){
+        if (!userId || typeof userId != 'string') {
             return resp.status(StatusCodes.BAD_REQUEST).json({
                 success: false,
                 message: "Invalid or missing user id"
             });
         }
 
-        const user=await this.userService.get(userId);
+        const user = await this.userService.get(userId);
 
-        if(!user){
+        if (!user) {
             return resp.status(StatusCodes.NOT_FOUND).json({
                 success: false,
                 message: "User with id not found"
@@ -39,9 +39,9 @@ export class UserController{
         });
     }
 
-    getAllUsers = async(_: Request, resp: Response) => {
+    getAllUsers = async (_: Request, resp: Response) => {
 
-        const response=await this.userService.getAll();
+        const response = await this.userService.getAll();
 
         return resp.status(StatusCodes.OK).json({
             success: true,
@@ -52,7 +52,7 @@ export class UserController{
     }
 
     createUser = async (req: Request, resp: Response) => {
-        const response=await this.userService.create(req.body);
+        const response = await this.userService.create(req.body);
 
         return resp.status(StatusCodes.CREATED).json({
             success: true,
@@ -62,8 +62,8 @@ export class UserController{
         });
     }
 
-    signIn = async(req: Request,resp: Response)=>{
-        const response=await this.userSignIn.signIn(req.body);
+    signIn = async (req: Request, resp: Response) => {
+        const response = await this.userSignIn.signIn(req.body);
 
         return resp.status(StatusCodes.OK).json({
             success: true,
@@ -73,5 +73,5 @@ export class UserController{
         });
     }
 
-    
+
 }
