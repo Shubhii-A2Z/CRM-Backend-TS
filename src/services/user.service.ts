@@ -3,11 +3,11 @@ import bcrypt from 'bcrypt';
 import { CreateUserDTO } from "@/dtos/CreateUserDTO";
 import { Repository } from "@/repositories/repository.interface";
 import { User } from "@prisma/client";
-import { Service } from './service.interface';
+import { UserService } from './service.interface';
 import { MailingStrategy } from './mailingService/mailer.strategy.interface';
 import { Mailer } from './mailingService/mailer';
 
-export class UserService implements Service{
+export class UserServiceImpl implements UserService{
 
     private repository: Repository;
     private mailer: MailingStrategy;

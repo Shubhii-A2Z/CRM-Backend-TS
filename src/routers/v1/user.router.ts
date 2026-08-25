@@ -3,15 +3,15 @@ import { JWTAuth } from '@/middlewares/validators/jwt.auth.middleware';
 import { validateRequestBody } from '@/middlewares/validate.middleware';
 import { createUserSchema, signInSchema } from '@/models/zod.schema';
 import { UserRepository } from '@/repositories/user.repository';
-import { UserService } from '@/services/user.service';
 import express from 'express';
 import { AuthStrategy } from '@/middlewares/validators/auth.strategy';
 import { Repository } from '@/repositories/repository.interface';
-import { Service } from '@/services/service.interface';
 import { JWTSignIn } from '@/services/signInService/jwt.signin';
 import { SignInStrategy } from '@/services/signInService/signin.strategy';
 import { MailingStrategy } from '@/services/mailingService/mailer.strategy.interface';
 import { SendGrid } from '@/services/mailingService/sendGrid.strategy';
+import { UserService } from '@/services/service.interface';
+import { UserServiceImpl } from '@/services/user.service';
 
 const userRouter = express.Router();
 
@@ -22,7 +22,7 @@ const mailerService: MailingStrategy=new SendGrid();
 const userRepository: Repository = new UserRepository();
 
 // Initializing the service strategy
-const userService: Service = new UserService(userRepository, mailerService);
+const userService: UserService = new UserServiceImpl(userRepository, mailerService);
 
 // Initializing the user sign in strategy
 const userSignIn: SignInStrategy = new JWTSignIn(userRepository);

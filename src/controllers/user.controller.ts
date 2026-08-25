@@ -1,13 +1,13 @@
-import { Service } from "@/services/service.interface";
+import { UserService } from "@/services/service.interface";
 import { SignInStrategy } from "@/services/signInService/signin.strategy";
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
 export class UserController {
-    private userService: Service;
+    private userService: UserService;
     private userSignIn: SignInStrategy;
 
-    constructor(userService: Service, userSignIn: SignInStrategy) {
+    constructor(userService: UserService, userSignIn: SignInStrategy) {
         this.userService = userService;
         this.userSignIn = userSignIn;
     }

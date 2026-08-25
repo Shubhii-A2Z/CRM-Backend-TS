@@ -1,8 +1,8 @@
 import { Ticket } from "@prisma/client";
-import { Service } from "./service.interface";
+import { TicketService } from "./ticket.interface";
 import { Repository } from "@/repositories/repository.interface";
 
-export class TicketService implements Service{
+export class TicketServiceImpl implements TicketService{
 
     private repository: Repository;
 
