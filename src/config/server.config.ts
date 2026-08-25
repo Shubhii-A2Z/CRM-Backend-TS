@@ -1,6 +1,6 @@
 process.loadEnvFile();
 
-export default{
+export const serverConfig = {
     PORT: process.env.PORT,
     DATABASE_URL: process.env.DATABASE_URL,
     DATABASE_PORT: process.env.DATABASE_PORT,
@@ -8,4 +8,5 @@ export default{
     AUTH_SECRET: process.env.AUTH_SECRET==undefined ? 'DUMMY_SECRET' : process.env.AUTH_SECRET,
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY==undefined ? 'DUMMY_KEY' : process.env.SENDGRID_API_KEY,
     MAIL_FROM: process.env.MAIL_FROM,
+    FRONTEND_URL: process.env.FRONTEND_URL,
 }

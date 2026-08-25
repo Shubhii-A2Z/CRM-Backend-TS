@@ -1,12 +1,12 @@
-import { Repository } from "./repository.interface";
 import { Ticket } from "@prisma/client";
 import { CreateTicketDTO } from "@/dtos/CreateTicketDTO";
 import { prismaClient } from "@/prisma/client";
+import { TicketRepository } from "./ticket.repository.interface";
 
-export class TicketRepository implements Repository{
+export class TicketRepositoryImpl implements TicketRepository {
 
     async create(data: CreateTicketDTO): Promise<Ticket> {
-        const ticket=await prismaClient.ticket.create({
+        const ticket = await prismaClient.ticket.create({
             data: {
                 ...data
             }
@@ -15,30 +15,21 @@ export class TicketRepository implements Repository{
     }
 
     async get(ticketId: string): Promise<Ticket | null> {
-        const ticket=await prismaClient.ticket.findUnique({
-            where:{
+        const ticket = await prismaClient.ticket.findUnique({
+            where: {
                 id: ticketId
             }
         });
         return ticket;
     }
 
-    async getAll(): Promise<Ticket[] | null> {
-        const tickets=await prismaClient.ticket.findMany();
+    async getAllTickets(): Promise<Ticket[] | null> {
+        const tickets = await prismaClient.ticket.findMany();
         return tickets;
     }
 
-    async delete() {
-        
-    }
+    async deleteTicket() {
 
-    async update() {
-        
     }
-
-    async getUserByEmail(_: string): Promise<any | null> {
-        return null;
-    }
-        
 
 }

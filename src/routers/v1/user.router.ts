@@ -1,11 +1,11 @@
 import { UserController } from '@/controllers/user.controller';
 import { JWTAuth } from '@/middlewares/validators/jwt.auth.middleware';
 import { validateRequestBody } from '@/middlewares/validate.middleware';
-import { createUserSchema, signInSchema } from '@/models/zod.schema';
-import { UserRepository } from '@/repositories/user.repository';
+import { createUserSchema, forgetPasswordSchema, resetPasswordSchema, signInSchema } from '@/models/zod.schema';
+import { UserRepository } from '@/repositories/user.repository.interface';
+import {  UserRepositoryImpl } from '@/repositories/user.repository';
 import express from 'express';
 import { AuthStrategy } from '@/middlewares/validators/auth.strategy';
-import { Repository } from '@/repositories/repository.interface';
 import { JWTSignIn } from '@/services/signInService/jwt.signin';
 import { SignInStrategy } from '@/services/signInService/signin.strategy';
 import { MailingStrategy } from '@/services/mailingService/mailer.strategy.interface';
@@ -16,10 +16,10 @@ import { UserServiceImpl } from '@/services/user.service';
 const userRouter = express.Router();
 
 // Initializing the mailing service strategy
-const mailerService: MailingStrategy=new SendGrid();
+const mailerService: MailingStrategy = new SendGrid();
 
 //Initializing the repository
-const userRepository: Repository = new UserRepository();
+const userRepository: UserRepository = new UserRepositoryImpl();
 
 // Initializing the service strategy
 const userService: UserService = new UserServiceImpl(userRepository, mailerService);
@@ -36,5 +36,8 @@ userRouter.get('/:id', jwtAuth.isLoggedIn, userController.getUser);
 userRouter.get('/', userController.getAllUsers);
 userRouter.post('/signup', validateRequestBody(createUserSchema), userController.createUser);
 userRouter.post('/signin', validateRequestBody(signInSchema), userController.signIn);
+
+userRouter.post('/forgot-password', validateRequestBody(forgetPasswordSchema), userController.forgetPassword);
+userRouter.post('/reset-password/:token', validateRequestBody(resetPasswordSchema), userController.resetPassword);
 
 export default userRouter;

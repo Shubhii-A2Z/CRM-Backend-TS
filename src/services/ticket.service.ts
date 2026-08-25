@@ -1,13 +1,13 @@
 import { Ticket } from "@prisma/client";
 import { TicketService } from "./ticket.interface";
-import { Repository } from "@/repositories/repository.interface";
+import { TicketRepository } from "@/repositories/ticket.repository.interface";
 
-export class TicketServiceImpl implements TicketService{
+export class TicketServiceImpl implements TicketService {
 
-    private repository: Repository;
+    private repository: TicketRepository;
 
-    constructor(repository: Repository){
-        this.repository=repository;
+    constructor(repository: TicketRepository) {
+        this.repository = repository;
     }
 
     async create(data: any): Promise<Ticket> {
@@ -19,7 +19,7 @@ export class TicketServiceImpl implements TicketService{
     }
 
     async getAll(): Promise<Ticket[] | null> {
-        return await this.repository.getAll();
+        return await this.repository.getAllTickets();
     }
-    
+
 }

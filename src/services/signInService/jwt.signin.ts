@@ -3,11 +3,11 @@ import { SignInStrategy } from "./signin.strategy";
 import { NotFoundError, UnauthorizedAccess } from "@/utils/errors/app.error";
 import bcrypt from "bcrypt";
 import { JWTToken } from "@/utils/auth.util";
-import { Repository } from "@/repositories/repository.interface";
+import { UserRepository } from "@/repositories/user.repository.interface";
 
 export class JWTSignIn implements SignInStrategy {
 
-    constructor(private repository: Repository) {
+    constructor(private repository: UserRepository) {
         this.repository = repository;
     }
 

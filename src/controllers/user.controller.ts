@@ -74,4 +74,30 @@ export class UserController {
     }
 
 
+    forgetPassword = async (req: Request, resp: Response) => {
+        await this.userService.getByEmail(req.body.email);
+        return resp.status(StatusCodes.OK).json({
+            success: true,
+            message: "Reset Password Link Sent Successfully"
+        });
+    }
+
+    resetPassword = async (req: Request, resp: Response) => {
+        const resetToken=req.params.token;
+
+        if (!resetToken || typeof resetToken != 'string') {
+            return resp.status(StatusCodes.BAD_REQUEST).json({
+                success: false,
+                message: "Invalid or missing reset token"
+            });
+        }
+
+        const response=await this.userService.resetPassword(resetToken,req.body);
+
+        return resp.status(StatusCodes.OK).json({
+            Response: response
+        });
+        
+    }
+
 }

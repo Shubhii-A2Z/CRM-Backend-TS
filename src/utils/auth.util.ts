@@ -1,5 +1,5 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import serverConfig from '@/config/server.config';
+import {serverConfig} from '@/config/server.config';
 
 export class JWTToken{
     generateJWtToken(obj: any): string{

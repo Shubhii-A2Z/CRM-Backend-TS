@@ -27,3 +27,11 @@ export const createTicketSchema=z.object({
     assignee: z.email({error: "Assignee is mandatory"}),
     assignedTo: z.email({error: "AssignedTo is mandatory"})
 });
+
+export const resetPasswordSchema=z.object({
+    newPassword: z.string({error: "Enter a new password"})
+});
+
+export const forgetPasswordSchema=z.object({
+    email: z.email({error: "Enter your email"})
+});

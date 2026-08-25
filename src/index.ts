@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { genericErrorHandler } from './middlewares/error.middleware';
-import serverConfig from './config/server.config';
+import {serverConfig} from './config/server.config';
 import logger from './config/logger.config';
 import apiRouter from './routers';
 import cookieParser from 'cookie-parser';
